@@ -1,0 +1,32 @@
+- hosts: dhcp
+  roles:
+    - name: mrlesmithjr.dnsmasq
+      vars:
+        dnsmasq_config: true
+        dnsmasq_dhcp_scopes:
+          - start: 192.168.16.128
+            end: 192.168.16.240
+            netmask: 255.255.255.0
+            lease_time: 24h
+        dnsmasq_listen_port: 0
+        dnsmasq_nameservers:
+          - 1.1.1.1
+          - 8.8.8.8
+        dnsmasq_pri_domain_name: test.data
+        dnsmasq_dhcp_options:
+          - option: dns-server
+            value:
+              - 192.168.16.9
+          - option: domain-search
+            value:
+              - test.data
+          - option: ntp-server
+            value:
+              - 192.168.16.9
+          - option: router
+            value:
+              - 192.168.16.2
+        dnsmasq_enable_dhcp: true
+        dnsmasq_enable_forwarders: false
+        dnsmasq_enable_tftp: false
+        dnsmasq_pri_netmask_cidr: 24

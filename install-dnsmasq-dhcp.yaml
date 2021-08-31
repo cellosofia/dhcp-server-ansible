@@ -30,3 +30,11 @@
         dnsmasq_enable_forwarders: false
         dnsmasq_enable_tftp: false
         dnsmasq_pri_netmask_cidr: 24
+
+  post_tasks:
+    - name: configure firewall for dhcp
+      firewalld:
+        service: dhcp
+        state: enabled
+        immediate: true
+        permanent: true
